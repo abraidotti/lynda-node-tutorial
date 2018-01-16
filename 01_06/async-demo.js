@@ -4,6 +4,6 @@ function phoneNumber(err, data) {
 	console.log('data:', data);
 }
 
-fs.readdir('c:/', phoneNumber);
+fs.readdir('./', phoneNumber);
 
 console.log("this comes after");
