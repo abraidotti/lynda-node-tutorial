@@ -3,10 +3,13 @@ var bodyParser = require('body-parser');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var mongoose = require('mongoose');
 
 app.use(express.static(__dirname));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
+
+var dbUrl = 'mongodb://user:user@ds257077.mlab.com:57077/abraidotti-lynda-node-tutorial'
 
 var messages = [
   {name: 'amber', message: 'hi sandy'},
@@ -25,6 +28,10 @@ app.post('/messages', (req, res) => {
 
 io.on('connection', (socket) => {
   console.log('a user connected');
+})
+
+mongoose.connect(dbUrl, {useMongoClient: true}, (err) => {
+  console.log('mongoDB connection', err);
 })
 
 var server = http.listen(3000, () => {
