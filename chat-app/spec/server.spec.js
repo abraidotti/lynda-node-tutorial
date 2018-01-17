@@ -20,3 +20,19 @@ describe('get messages', () => {
     })
   })
 })
+
+describe('get messages from user', () => {
+  it('should return 200 OK', () => {
+    request.get('http://localhost:3000/bun', (err, res) => {
+      expect(res.statusCode).toEqual(200);
+      done()
+    })
+  })
+  it("should have 'bun' as the name", () => {
+    request.get('http://localhost:3000/bun', (err, res) => {
+      expect(JSON.parse(res.body)[0].name).toEqual('bun');
+      done()
+    })
+  })
+
+})
